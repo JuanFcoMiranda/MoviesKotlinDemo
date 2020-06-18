@@ -1,6 +1,6 @@
 package com.jfma75.movieskotlindemo
 
-import androidx.compose.Composable
+import androidx.compose.*
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
@@ -26,8 +26,14 @@ import java.util.*
 /**
  * @sample com.jfma75.movieskotlindemo.BuyTickets_Preview
  */
+
+var selectedDate : Date by mutableStateOf(Date())
+var selectedHour : Long by mutableStateOf(Date().time)
+
 @Composable
 fun BuyTickets(movieId: Long) {
+
+    //var selectedHour : Date? by state { null }
     val movie = movies.flatten().first { movie -> movie.id == movieId }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -42,7 +48,6 @@ fun BuyTickets(movieId: Long) {
 
 @Composable
 fun HeaderView(movie: Movie) {
-    val date = Date()
     Column(modifier = Modifier.padding(8.dp)) {
         Box(modifier = Modifier.preferredSize(height = 180.dp, width = 120.dp)) {
             Image(
@@ -52,7 +57,7 @@ fun HeaderView(movie: Movie) {
             )
         }
     }
-    Column(modifier = Modifier.padding(8.dp), horizontalGravity = Alignment.Start) {
+    Column(modifier = Modifier.padding(12.dp), horizontalGravity = Alignment.Start) {
         Text(text = movie.name, style = MaterialTheme.typography.h6)
         Text(text = movie.genre, style = MaterialTheme.typography.body1)
 
@@ -61,7 +66,7 @@ fun HeaderView(movie: Movie) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
-                    text = date.formatToViewDateDefaults("MMM dd EEEE").toUpperCase(Locale.ROOT),
+                    text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").toUpperCase(Locale.ROOT),
                     style = MaterialTheme.typography.subtitle2.merge(
                         TextStyle(
                             color = Color.White,
@@ -83,13 +88,6 @@ fun HeaderView(movie: Movie) {
             }
         }
     }
-}
-
-fun getDaysAgo(daysAgo: Int): Date {
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
-
-    return calendar.time
 }
 
 fun getCalendars(): List<List<Date?>> {
@@ -129,17 +127,19 @@ fun CalendarView() {
 @Composable
 fun DayButtonView(day: Date) {
     Button(
-        onClick = {},
+        onClick = { selectedDate = day },
         shape = RoundedCornerShape(12.dp),
+        elevation = 12.dp,
+        backgroundColor = if (selectedDate == day) { Color(0xFFDD0D3C) } else { Color.White },
         modifier = Modifier.preferredSize(width = 70.dp, height = 90.dp).padding(0.dp)
     ) {
-        Column(horizontalGravity = Alignment.CenterHorizontally, modifier = Modifier.padding(0.dp)) {
+        Column(horizontalGravity = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Text(
                 text = day.formatToViewDateDefaults("MMM").toUpperCase(Locale.ROOT),
                 modifier = Modifier.gravity(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
-                        color = Color.White,
+                        color = if (selectedDate == day) { Color.White } else { Color.Black },
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -151,7 +151,7 @@ fun DayButtonView(day: Date) {
                 modifier = Modifier.gravity(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
-                        color = Color.White,
+                        color = if (selectedDate == day) { Color.White } else { Color.Black },
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -162,7 +162,7 @@ fun DayButtonView(day: Date) {
                     text = day.formatToViewDateDefaults("EEEE").toUpperCase(Locale.ROOT),
                     modifier = Modifier.wrapContentSize(align = Alignment.Center),
                     maxLines = 1,
-                    style = TextStyle(color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                    color = if (selectedDate == day) { Color.White } else { Color.Black }
             )
         }
     }
