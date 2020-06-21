@@ -92,6 +92,16 @@ fun Date.add(field: Int, amount: Int): Date {
     return this
 }
 
+fun Date.onlyDate(): Date {
+    val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    return sdf.parse(sdf.format(this)) ?: this
+}
+
+fun Date.onlyTime(): Date {
+    val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    return sdf.parse(sdf.format(this)) ?: this
+}
+
 fun Date.addYears(years: Int): Date {
     return add(Calendar.YEAR, years)
 }

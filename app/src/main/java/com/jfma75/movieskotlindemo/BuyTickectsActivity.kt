@@ -1,6 +1,9 @@
 package com.jfma75.movieskotlindemo
 
-import androidx.compose.*
+import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.mutableStateOf
+import androidx.compose.setValue
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
@@ -8,8 +11,8 @@ import androidx.ui.core.clip
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.isSystemInDarkTheme
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
@@ -20,6 +23,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.jfma75.movieskotlindemo.extensions.formatToViewDateDefaults
+import com.jfma75.movieskotlindemo.extensions.onlyDate
 import com.jfma75.movieskotlindemo.models.Movie
 import java.util.*
 
@@ -69,7 +73,6 @@ fun HeaderView(movie: Movie) {
                     text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").toUpperCase(Locale.ROOT),
                     style = MaterialTheme.typography.subtitle2.merge(
                         TextStyle(
-                            color = Color.White,
                             fontSize = 12.sp
                         )
                     )
@@ -80,7 +83,6 @@ fun HeaderView(movie: Movie) {
                     text = "7:00 PM",
                     style = MaterialTheme.typography.subtitle2.merge(
                         TextStyle(
-                            color = Color.White,
                             fontSize = 12.sp
                         )
                     )
@@ -126,11 +128,17 @@ fun CalendarView() {
 
 @Composable
 fun DayButtonView(day: Date) {
+    val colors = if (isSystemInDarkTheme()) {
+        darkThemeColors
+    } else {
+        lightThemeColors
+    }
+
     Button(
         onClick = { selectedDate = day },
         shape = RoundedCornerShape(12.dp),
         elevation = 12.dp,
-        backgroundColor = if (selectedDate == day) { Color(0xFFDD0D3C) } else { Color.White },
+        backgroundColor = if (day.formatToViewDateDefaults() == selectedDate.formatToViewDateDefaults()) { colors.primary } else { colors.secondary },
         modifier = Modifier.preferredSize(width = 70.dp, height = 90.dp).padding(0.dp)
     ) {
         Column(horizontalGravity = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
@@ -139,7 +147,7 @@ fun DayButtonView(day: Date) {
                 modifier = Modifier.gravity(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
-                        color = if (selectedDate == day) { Color.White } else { Color.Black },
+                        color = if (day.onlyDate() == selectedDate.onlyDate()) { colors.secondary } else { colors.primary },
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -151,7 +159,7 @@ fun DayButtonView(day: Date) {
                 modifier = Modifier.gravity(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
-                        color = if (selectedDate == day) { Color.White } else { Color.Black },
+                        color = if (day.onlyDate() == selectedDate.onlyDate()) { colors.secondary } else { colors.primary },
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -159,10 +167,16 @@ fun DayButtonView(day: Date) {
             )
             Spacer(Modifier.preferredHeight(8.dp))
             Text(
-                    text = day.formatToViewDateDefaults("EEEE").toUpperCase(Locale.ROOT),
-                    modifier = Modifier.wrapContentSize(align = Alignment.Center),
-                    maxLines = 1,
-                    color = if (selectedDate == day) { Color.White } else { Color.Black }
+                text = day.formatToViewDateDefaults("EEEE").toUpperCase(Locale.ROOT),
+                modifier = Modifier.wrapContentSize(align = Alignment.Center),
+                maxLines = 1,
+                style = MaterialTheme.typography.overline.merge(
+                    TextStyle(
+                        color = if (day.onlyDate() == selectedDate.onlyDate()) { colors.secondary } else { colors.primary },
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
             )
         }
     }
