@@ -1,4 +1,4 @@
-package com.jfma75.movieskotlindemo
+package com.jfma75.movieskotlindemo.theme
 
 import androidx.compose.Composable
 import androidx.ui.foundation.isSystemInDarkTheme
@@ -41,15 +41,10 @@ val darkThemeColors = darkColorPalette(
 
 @Composable
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        darkThemeColors
-    } else {
-        lightThemeColors
-    }
-
     MaterialTheme(
-        colors = colors,
+        colors = if (darkTheme) darkThemeColors else lightThemeColors,
         typography = themeTypography,
+        shapes = Shapes,
         content = content
     )
 }

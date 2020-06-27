@@ -1,4 +1,4 @@
-package com.jfma75.movieskotlindemo
+package com.jfma75.movieskotlindemo.theme
 
 import androidx.ui.material.Typography
 import androidx.ui.text.TextStyle
@@ -6,12 +6,17 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.text.font.font
 import androidx.ui.text.font.fontFamily
 import androidx.ui.unit.sp
+import com.jfma75.movieskotlindemo.R
 
 val regular = font(R.font.montserrat_regular)
 val medium = font(R.font.montserrat_medium, FontWeight.W500)
 val semibold = font(R.font.montserrat_medium, FontWeight.W600)
 
-val appFontFamily = fontFamily(fonts = listOf(regular, medium, semibold))
+val appFontFamily = fontFamily(fonts = listOf(
+    regular,
+    medium,
+    semibold
+))
 
 val bodyFontFamily = fontFamily(
     fonts = listOf(

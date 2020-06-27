@@ -3,7 +3,7 @@
     package="com.jfma75.movieskotlindemo">
 
     <application
-        android:name="MoviesKotlinDemo"
+        android:name="MoviesKotlinDemoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

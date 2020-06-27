@@ -1,24 +1,17 @@
 package com.jfma75.movieskotlindemo
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.animation.Crossfade
-import androidx.ui.core.*
-import androidx.ui.foundation.*
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.*
-import androidx.ui.material.*
-import androidx.ui.res.imageResource
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import com.jfma75.movieskotlindemo.extensions.AppScreen
-import com.jfma75.movieskotlindemo.extensions.MyAppStatus
-import com.jfma75.movieskotlindemo.extensions.Screen
+import androidx.ui.core.setContent
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Surface
 import com.jfma75.movieskotlindemo.models.Movie
+import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
+import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
+import com.jfma75.movieskotlindemo.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 var movies = listOf(
@@ -42,91 +35,39 @@ var movies = listOf(
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val state = MyAppStatus()
+    private val navigationViewModel by viewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppContent(state)
+            App(navigationViewModel)
         }
-
-        //intent?.data?.let { state.navigateTo(Screen.Home) }
     }
 
     override fun onBackPressed() {
-        if (!state.navigateBack()) {
+        if (!navigationViewModel.onBack()) {
             super.onBackPressed()
         }
     }
 }
 
 @Composable
-fun AppContent(state: MyAppStatus) {
-    Crossfade(state.currentScreen) { screen ->
-        AppScreen(
+fun App(viewModel: NavigationViewModel) {
+    AppTheme {
+        AppContent(navigationViewModel = viewModel)
+    }
+}
+
+@Composable
+private fun AppContent(navigationViewModel: NavigationViewModel) {
+    Crossfade(navigationViewModel.currentScreen) { screen ->
+        Surface(color = MaterialTheme.colors.background) {
             when (screen) {
-                is Screen.Home -> "Kotlin Movies"
-                is Screen.BuyTickets -> "Buy Tickets"
-            },
-            state
-        ) {
-            when (screen) {
-                is Screen.Home -> MoviesList(state)
-                is Screen.BuyTickets ->  BuyTickets(movieId = screen.movieId)
+                is Screen.Home -> MoviesHomeScreen(navigateTo = navigationViewModel::navigateTo)
+                is Screen.BuyTickets -> BuyTicketsScreen(
+                    movieId = screen.movieId,
+                    onBack = { navigationViewModel.onBack() })
             }
         }
-    }
-}
-
-@Composable
-fun MoviesList(state: MyAppStatus) {
-    VerticalScroller {
-        Column {
-            movies.forEach { row ->
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                    row.forEach { movie ->
-                        MovieView(movie, state)
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MovieView(movie: Movie, state: MyAppStatus) {
-    Column(modifier = Modifier.padding(16.dp), horizontalGravity = Alignment.CenterHorizontally) {
-        Box(modifier = Modifier.preferredSize(width = 160.dp, height =  230.dp)) {
-            Image(
-                asset = imageResource(movie.imageId),
-                modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Crop
-            )
-        }
-        Spacer(Modifier.preferredHeight(8.dp))
-        Text(
-            text = movie.name,
-            style = MaterialTheme.typography.body1
-        )
-        Spacer(Modifier.preferredHeight(8.dp))
-        Button(
-            modifier = Modifier.drawShadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
-            onClick = {
-                state.navigateTo(Screen.BuyTickets(movie.id))
-            }
-        ) {
-            Text(
-                text = "Buy Tickets",
-                style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MaterialTheme(colors = lightThemeColors) {
-        MoviesList(MyAppStatus())
     }
 }

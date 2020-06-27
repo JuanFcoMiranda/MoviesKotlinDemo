@@ -1,21 +1,16 @@
-package com.jfma75.movieskotlindemo
+package com.jfma75.movieskotlindemo.screens
 
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.mutableStateOf
 import androidx.compose.setValue
-import androidx.ui.core.Alignment
-import androidx.ui.core.ContentScale
-import androidx.ui.core.Modifier
-import androidx.ui.core.clip
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.isSystemInDarkTheme
+import androidx.ui.core.*
+import androidx.ui.foundation.*
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
-import androidx.ui.material.Button
-import androidx.ui.material.MaterialTheme
+import androidx.ui.material.*
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.ArrowBack
 import androidx.ui.res.imageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
@@ -25,6 +20,8 @@ import androidx.ui.unit.sp
 import com.jfma75.movieskotlindemo.extensions.formatToViewDateDefaults
 import com.jfma75.movieskotlindemo.extensions.onlyDate
 import com.jfma75.movieskotlindemo.models.Movie
+import com.jfma75.movieskotlindemo.movies
+import com.jfma75.movieskotlindemo.theme.lightThemeColors
 import java.util.*
 
 /**
@@ -35,19 +32,37 @@ var selectedDate : Date by mutableStateOf(Date())
 var selectedHour : Long by mutableStateOf(Date().time)
 
 @Composable
-fun BuyTickets(movieId: Long) {
-
-    //var selectedHour : Date? by state { null }
+fun BuyTicketsScreen(movieId: Long, onBack: () -> Unit) {
     val movie = movies.flatten().first { movie -> movie.id == movieId }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        Row(Modifier.fillMaxWidth()) {
-            HeaderView(movie)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = movie.name,
+                        style = MaterialTheme.typography.subtitle1,
+                        color = contentColor()
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.Filled.ArrowBack)
+                    }
+                }
+            )
+        },
+        bodyContent = {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Row(Modifier.fillMaxWidth()) {
+                    HeaderView(movie)
+                }
+                Row(Modifier.fillMaxWidth()) {
+                    CalendarView()
+                }
+            }
         }
-        Row(Modifier.fillMaxWidth()) {
-            CalendarView()
-        }
-    }
+    )
 }
 
 @Composable
@@ -128,11 +143,7 @@ fun CalendarView() {
 
 @Composable
 fun DayButtonView(day: Date) {
-    val colors = if (isSystemInDarkTheme()) {
-        darkThemeColors
-    } else {
-        lightThemeColors
-    }
+    val colors = MaterialTheme.colors
 
     Button(
         onClick = { selectedDate = day },
@@ -186,6 +197,6 @@ fun DayButtonView(day: Date) {
 @Composable
 fun BuyTickets_Preview() {
     MaterialTheme(colors = lightThemeColors) {
-        BuyTickets(movies.flatten().first().id)
+        BuyTicketsScreen(movies.flatten().first().id, {})
     }
 }
