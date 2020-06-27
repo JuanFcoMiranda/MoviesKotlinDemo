@@ -1,6 +1,8 @@
+![Android CI](https://github.com/Zpecter/MoviesKotlinDemo/workflows/Android%20CI/badge.svg)
+
 # MoviesKotlinDemo
 
-PoC of an application to book a ticket to watch a movie with JetPack Compose.
+Application to book a ticket to watch a movie with JetPack Compose.
 
 Screenshots (Light Mode)
 ------------------------
