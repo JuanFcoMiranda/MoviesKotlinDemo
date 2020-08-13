@@ -21,7 +21,7 @@ var movies = listOf(
     ),
     listOf(
         Movie(2, "Jurassic World", "Action", R.drawable.jurassic_world),
-        Movie(3, "Tomb Rider", "Action", R.drawable.tomb_raider)
+        Movie(3, "Tomb Raider", "Action", R.drawable.tomb_raider)
     ),
     listOf(
         Movie(4, "Deadpool 2", "Action", R.drawable.deadpool_2),
@@ -29,7 +29,7 @@ var movies = listOf(
     ),
     listOf(
         Movie(6, "Jurassic World", "Action", R.drawable.jurassic_world),
-        Movie(7, "Tomb Rider", "Action", R.drawable.tomb_raider)
+        Movie(7, "Tomb Raider", "Action", R.drawable.tomb_raider)
     )
 )
 

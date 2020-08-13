@@ -31,7 +31,7 @@ fun MoviesHomeScreen(navigateTo: (Screen) -> Unit) {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Movies",
+                        text = "Kotlin Movies",
                         style = MaterialTheme.typography.subtitle1,
                         color = contentColor()
                     )
