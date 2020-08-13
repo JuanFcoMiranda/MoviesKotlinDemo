@@ -1,13 +1,13 @@
 package com.jfma75.movieskotlindemo.theme
 
-import androidx.compose.Composable
-import androidx.ui.foundation.isSystemInDarkTheme
-import androidx.ui.graphics.Color
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.darkColorPalette
-import androidx.ui.material.lightColorPalette
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
-val lightThemeColors = lightColorPalette(
+val lightThemeColors = lightColors(
     primary = Color(0xFFDD0D3C),
     primaryVariant = Color(0xFFC20029),
     onPrimary = Color.White,
@@ -25,7 +25,7 @@ val lightThemeColors = lightColorPalette(
  * Note: Dark Theme support is not yet available, it will come in 2020. This is just an example of
  * using dark colors.
  */
-val darkThemeColors = darkColorPalette(
+val darkThemeColors = darkColors(
     primary = Color(0xFFEA6D7E),
     primaryVariant = Color(0xFFDD0D3E),
     onPrimary = Color.White,

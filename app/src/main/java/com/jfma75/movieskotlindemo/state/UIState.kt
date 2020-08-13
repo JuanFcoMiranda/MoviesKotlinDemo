@@ -16,11 +16,7 @@
 
 package com.jfma75.movieskotlindemo.state
 
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.onActive
-import androidx.compose.setValue
-import androidx.compose.state
+import androidx.compose.runtime.*
 import com.jfma75.movieskotlindemo.models.Result
 
 typealias RepositoryCall<T> = ((Result<T>) -> Unit) -> Unit
@@ -39,10 +35,8 @@ sealed class UIState<out T> {
  * effects are Compose lifecycle aware.
  */
 @Composable
-fun <T> uiStateFrom(
-    repositoryCall: RepositoryCall<T>
-): UIState<T> {
-    var state: UIState<T> by state<UIState<T>> { UIState.Loading }
+fun <T> uiStateFrom(repositoryCall: RepositoryCall<T>): UIState<T> {
+    var state: UIState<T> by state { UIState.Loading }
 
     // Whenever this effect is used in a composable function, it'll load data from the repository
     // when the first composition is applied
@@ -62,9 +56,7 @@ fun <T> uiStateFrom(
  * Helper function that loads data from a repository call. Only use in Previews!
  */
 @Composable
-fun <T> previewDataFrom(
-    repositoryCall: RepositoryCall<T>
-): T {
+fun <T> previewDataFrom(repositoryCall: RepositoryCall<T>): T {
     var state: T? = null
     repositoryCall { result ->
         state = (result as Result.Success).data

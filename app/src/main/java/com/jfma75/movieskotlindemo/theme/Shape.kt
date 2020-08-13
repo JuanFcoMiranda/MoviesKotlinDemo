@@ -16,9 +16,9 @@
 
 package com.jfma75.movieskotlindemo.theme
 
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.material.Shapes
-import androidx.ui.unit.dp
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Shapes
+import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes(
     small = RoundedCornerShape(4.dp),

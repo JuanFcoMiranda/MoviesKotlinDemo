@@ -16,11 +16,7 @@
 
 package com.jfma75.movieskotlindemo.state
 
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.onActive
-import androidx.compose.setValue
-import androidx.compose.state
+import androidx.compose.runtime.*
 import com.jfma75.movieskotlindemo.models.Result
 
 /**
@@ -50,11 +46,8 @@ data class RefreshableUiStateHandler<out T>(
  * effects are Compose lifecycle aware.
  */
 @Composable
-fun <T> refreshableUiStateFrom(
-    repositoryCall: RepositoryCall<T>
-): RefreshableUiStateHandler<T> {
-
-    var state: RefreshableUiState<T> by state<RefreshableUiState<T>> {
+fun <T> refreshableUiStateFrom(repositoryCall: RepositoryCall<T>): RefreshableUiStateHandler<T> {
+    var state: RefreshableUiState<T> by state {
         RefreshableUiState.Success(data = null, loading = true)
     }
 

@@ -18,9 +18,8 @@ package com.jfma75.movieskotlindemo
 
 import android.os.Bundle
 import androidx.annotation.MainThread
-import androidx.compose.frames.ModelList
-import androidx.compose.getValue
-import androidx.compose.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

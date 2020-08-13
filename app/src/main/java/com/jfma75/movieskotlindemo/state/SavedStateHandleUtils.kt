@@ -17,8 +17,8 @@
 package com.jfma75.movieskotlindemo.state
 
 import android.os.Bundle
-import androidx.compose.MutableState
-import androidx.compose.mutableStateOf
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 
 /**
@@ -30,12 +30,7 @@ import androidx.lifecycle.SavedStateHandle
  * @param save convert [T] to a [Bundle] for saving
  * @param restore restore a [T] from a [Bundle]
  */
-fun <T> SavedStateHandle.getMutableStateOf(
-    key: String,
-    default: T,
-    save: (T) -> Bundle,
-    restore: (Bundle) -> T
-): MutableState<T> {
+fun <T> SavedStateHandle.getMutableStateOf(key: String, default: T, save: (T) -> Bundle, restore: (Bundle) -> T): MutableState<T> {
     val bundle: Bundle? = get(key)
     val initial = if (bundle == null) { default } else { restore(bundle) }
     val state = mutableStateOf(initial)

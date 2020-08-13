@@ -3,11 +3,11 @@ package com.jfma75.movieskotlindemo
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.animation.Crossfade
-import androidx.ui.core.setContent
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Surface
+import androidx.compose.animation.Crossfade
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.setContent
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
