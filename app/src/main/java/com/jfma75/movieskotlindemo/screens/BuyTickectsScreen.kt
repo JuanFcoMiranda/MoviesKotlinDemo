@@ -202,7 +202,7 @@ fun BuyTickets_Preview() {
     MaterialTheme(colors = lightThemeColors) {
         BuyTicketsScreen(movies.flatten().first().id, {})
     }
-    MaterialTheme(colors = darkThemeColors) {
+    /*MaterialTheme(colors = darkThemeColors) {
         BuyTicketsScreen(movies.flatten().first().id, {})
-    }
+    }*/
 }
