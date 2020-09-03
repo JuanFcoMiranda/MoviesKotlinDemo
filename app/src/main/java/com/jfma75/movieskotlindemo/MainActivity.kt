@@ -35,7 +35,7 @@ var movies = listOf(
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val navigationViewModel by viewModels<NavigationViewModel>()
+    private val navigationViewModel: NavigationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

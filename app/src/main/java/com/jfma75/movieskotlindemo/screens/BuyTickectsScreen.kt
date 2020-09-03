@@ -6,10 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,13 +21,12 @@ import com.jfma75.movieskotlindemo.extensions.formatToViewDateDefaults
 import com.jfma75.movieskotlindemo.extensions.onlyDate
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.movies
-import com.jfma75.movieskotlindemo.theme.darkThemeColors
 import com.jfma75.movieskotlindemo.theme.lightThemeColors
 import java.util.*
 
 /**
  * @sample com.jfma75.movieskotlindemo.BuyTickets_Preview
- */
+ * */
 
 var selectedDate by mutableStateOf(Date())
 
@@ -58,7 +54,7 @@ fun BuyTicketsScreen(movieId: Long, onBack: () -> Unit) {
         bodyContent = {
             Column(modifier = Modifier.fillMaxSize()) {
                 Row(Modifier.fillMaxWidth()) {
-                    HeaderView(movie)
+                    HeaderView(movie = movie)
                 }
                 Row(Modifier.fillMaxWidth()) {
                     CalendarView()

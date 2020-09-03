@@ -34,8 +34,10 @@ fun <T> SavedStateHandle.getMutableStateOf(key: String, default: T, save: (T) ->
     val bundle: Bundle? = get(key)
     val initial = if (bundle == null) { default } else { restore(bundle) }
     val state = mutableStateOf(initial)
+
     setSavedStateProvider(key) {
         save(state.value)
     }
+
     return state
 }

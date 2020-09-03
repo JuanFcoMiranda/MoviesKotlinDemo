@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val lightThemeColors = lightColors(
-    primary = Color(0xFFDD0D3C),
-    primaryVariant = Color(0xFFC20029),
+    primary = FunctionalRed2,
+    primaryVariant = FunctionalRed3,
     onPrimary = Color.White,
     secondary = Color.White,
     onSecondary = Color.Black,
@@ -17,7 +17,7 @@ val lightThemeColors = lightColors(
     onBackground = Color.Black,
     surface = Color.White,
     onSurface = Color.Black,
-    error = Color(0xFFD00036),
+    error = FunctionalRed,
     onError = Color.White
 )
 
@@ -26,21 +26,21 @@ val lightThemeColors = lightColors(
  * using dark colors.
  */
 val darkThemeColors = darkColors(
-    primary = Color(0xFFEA6D7E),
-    primaryVariant = Color(0xFFDD0D3E),
+    primary = FunctionalRedDark,
+    primaryVariant = FuncionalRedDark2,
     onPrimary = Color.White,
-    secondary = Color(0xFF121212),
+    secondary = Neutral8,
     onSecondary = Color.White,
-    background = Color(0xFF121212),
+    background = Neutral8,
     onBackground = Color.White,
-    surface = Color(0xFF121212),
+    surface = Neutral8,
     onSurface = Color.White,
-    error = Color(0xFFDD0D3E),
+    error = FuncionalRedDark2,
     onError = Color.Black
 )
 
 @Composable
-fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
         colors = if (darkTheme) darkThemeColors else lightThemeColors,
         typography = themeTypography,
