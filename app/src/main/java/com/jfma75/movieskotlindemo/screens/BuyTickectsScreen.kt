@@ -2,11 +2,16 @@ package com.jfma75.movieskotlindemo.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -75,7 +80,7 @@ fun HeaderView(movie: Movie) {
             )
         }
     }
-    Column(modifier = Modifier.padding(12.dp), horizontalGravity = Alignment.Start) {
+    Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.Start) {
         Text(text = movie.name, style = MaterialTheme.typography.h6)
         Text(text = movie.genre, style = MaterialTheme.typography.body1)
 
@@ -151,10 +156,10 @@ fun DayButtonView(day: Date) {
         backgroundColor = if (day.formatToViewDateDefaults() == selectedDate.formatToViewDateDefaults()) { colors.primary } else { colors.secondary },
         modifier = Modifier.preferredSize(width = 70.dp, height = 90.dp).padding(0.dp)
     ) {
-        Column(horizontalGravity = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Text(
                 text = day.formatToViewDateDefaults("MMM").toUpperCase(Locale.ROOT),
-                modifier = Modifier.gravity(Alignment.CenterHorizontally),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
                         color = if (day.onlyDate() == selectedDate.onlyDate()) { colors.secondary } else { colors.primary },
@@ -166,7 +171,7 @@ fun DayButtonView(day: Date) {
             Spacer(Modifier.preferredHeight(8.dp))
             Text(
                 text = day.formatToViewDateDefaults("dd").toUpperCase(Locale.ROOT),
-                modifier = Modifier.gravity(Alignment.CenterHorizontally),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
                         color = if (day.onlyDate() == selectedDate.onlyDate()) { colors.secondary } else { colors.primary },

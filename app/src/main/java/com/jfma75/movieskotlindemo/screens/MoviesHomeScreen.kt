@@ -2,6 +2,7 @@ package com.jfma75.movieskotlindemo.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -61,7 +62,7 @@ private fun HomeScreenContent(navigateTo: (Screen) -> Unit) {
 
 @Composable
 fun MovieView(movie: Movie, navigateTo: (Screen) -> Unit) {
-    Column(modifier = Modifier.padding(16.dp), horizontalGravity = Alignment.CenterHorizontally) {
+    Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier.preferredSize(width = 160.dp, height =  230.dp)) {
             Image(
                 asset = imageResource(movie.imageId),
