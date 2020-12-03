@@ -1,32 +1,35 @@
 package com.jfma75.movieskotlindemo.screens
 
-import androidx.compose.foundation.*
+import androidx.compose.material.AmbientContentColor
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawShadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
-import com.jfma75.movieskotlindemo.Screen
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.tooling.preview.Preview
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.movies
 import com.jfma75.movieskotlindemo.theme.lightThemeColors
 
 @Composable
-fun MoviesHomeScreen(navigateTo: (Screen) -> Unit) {
+fun MoviesHomeScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -34,25 +37,25 @@ fun MoviesHomeScreen(navigateTo: (Screen) -> Unit) {
                     Text(
                         text = "Kotlin Movies",
                         style = MaterialTheme.typography.subtitle1,
-                        color = contentColor()
+                        color = AmbientContentColor.current
                     )
                 }
             )
         },
         bodyContent = {
-            HomeScreenContent(navigateTo)
+            HomeScreenContent(navController)
         }
     )
 }
 
 @Composable
-private fun HomeScreenContent(navigateTo: (Screen) -> Unit) {
+fun HomeScreenContent(navController: NavHostController) {
     ScrollableColumn {
         Column {
             movies.forEach { row ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                     row.forEach { movie ->
-                        MovieView(movie, navigateTo)
+                        MovieView(movie, navController)
                     }
                 }
             }
@@ -61,11 +64,11 @@ private fun HomeScreenContent(navigateTo: (Screen) -> Unit) {
 }
 
 @Composable
-fun MovieView(movie: Movie, navigateTo: (Screen) -> Unit) {
+fun MovieView(movie: Movie, navController: NavHostController) {
     Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier.preferredSize(width = 160.dp, height =  230.dp)) {
             Image(
-                asset = imageResource(movie.imageId),
+                imageResource(movie.imageId),
                 modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Fit
             )
@@ -78,7 +81,7 @@ fun MovieView(movie: Movie, navigateTo: (Screen) -> Unit) {
         Spacer(Modifier.preferredHeight(8.dp))
         Button(
             modifier = Modifier.drawShadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
-            onClick = { navigateTo(Screen.BuyTickets(movie.id)) }
+            onClick = { navController.navigate("BuyTickets/${movie.id}L") }
         ) {
             Text(
                 text = "Buy Tickets",
@@ -88,10 +91,24 @@ fun MovieView(movie: Movie, navigateTo: (Screen) -> Unit) {
     }
 }
 
+@Composable
+fun NavigateBackButton(navController: NavController) {
+    if (navController.previousBackStackEntry != null) {
+        Button(
+            onClick = { navController.popBackStack() },
+            colors = ButtonConstants.defaultButtonColors(backgroundColor = LightGray),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Go to Previous screen")
+        }
+    }
+}
+
 @Preview
 @Composable
 fun MoviesHomeScreen_Preview() {
     MaterialTheme(colors = lightThemeColors) {
-        MoviesHomeScreen({})
+        val navController = rememberNavController()
+        MoviesHomeScreen(navController = navController)
     }
 }

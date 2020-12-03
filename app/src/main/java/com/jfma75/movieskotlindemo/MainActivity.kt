@@ -8,8 +8,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.rememberNavController
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
+import com.jfma75.movieskotlindemo.screens.HomeScreenContent
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
 import com.jfma75.movieskotlindemo.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,39 +41,31 @@ var movies = listOf(
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val navigationViewModel: NavigationViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            App(navigationViewModel)
-        }
-    }
-
-    override fun onBackPressed() {
-        if (!navigationViewModel.onBack()) {
-            super.onBackPressed()
+            App()
         }
     }
 }
 
 @Composable
-fun App(viewModel: NavigationViewModel) {
+fun App() {
     AppTheme {
-        AppContent(navigationViewModel = viewModel)
+        AppContent()
     }
 }
 
 @Composable
-private fun AppContent(navigationViewModel: NavigationViewModel) {
-    Crossfade(navigationViewModel.currentScreen) { screen ->
-        Surface(color = MaterialTheme.colors.background) {
-            when (screen) {
-                is Screen.Home -> MoviesHomeScreen(navigateTo = navigationViewModel::navigateTo)
-                is Screen.BuyTickets -> BuyTicketsScreen(
-                    movieId = screen.movieId,
-                    onBack = { navigationViewModel.onBack() })
-            }
+private fun AppContent() {
+    val navController = rememberNavController()
+
+    NavHost(navController, startDestination = "Home") {
+        composable("Home") {
+            MoviesHomeScreen(navController)
+        }
+        composable("BuyTickets/{movieId}", arguments = listOf(navArgument("movieId") { type = NavType.LongType })) { backStack ->
+            BuyTicketsScreen(navController, backStack.arguments?.getLong("movieId"))
         }
     }
 }

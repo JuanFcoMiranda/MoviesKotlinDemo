@@ -2,6 +2,12 @@ package com.jfma75.movieskotlindemo.theme
 
 import androidx.compose.ui.graphics.Color
 
+val purple200 = Color(0xFFBB86FC)
+val purple = Color(0xFFAB47BC)
+val purple500 = Color(0xFF6200EE)
+val purple700 = Color(0xFF3700B3)
+val teal200 = Color(0xFF03DAC5)
+
 val Shadow11 = Color(0xff001787)
 val Shadow10 = Color(0xff00119e)
 val Shadow9 = Color(0xff0009b3)
