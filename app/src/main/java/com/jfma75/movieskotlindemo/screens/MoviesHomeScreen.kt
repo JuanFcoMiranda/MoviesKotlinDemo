@@ -3,7 +3,7 @@ package com.jfma75.movieskotlindemo.screens
 import androidx.compose.material.AmbientContentColor
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
+import androidx.compose.material.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.layout.ContentScale
@@ -80,7 +80,7 @@ fun MovieView(movie: Movie, navController: NavHostController) {
         )
         Spacer(Modifier.preferredHeight(8.dp))
         Button(
-            modifier = Modifier.drawShadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
+            modifier = Modifier.shadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
             onClick = { navController.navigate("BuyTickets/${movie.id}L") }
         ) {
             Text(
