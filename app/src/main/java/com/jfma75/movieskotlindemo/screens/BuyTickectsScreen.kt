@@ -154,7 +154,11 @@ fun DayButtonView(day: Date) {
     Button(
         onClick = { selectedDate = day },
         shape = RoundedCornerShape(12.dp),
-        colors = ButtonConstants.defaultButtonColors(backgroundColor = if (day.formatToViewDateDefaults() == selectedDate.formatToViewDateDefaults()) { Color.Red } else { Color.White }),
+        colors = ButtonConstants.defaultButtonColors(backgroundColor = when {
+                day.formatToViewDateDefaults() == selectedDate.formatToViewDateDefaults() -> { colors.primary }
+                else -> { colors.secondary }
+            }
+        ),
         modifier = Modifier.preferredSize(width = 70.dp, height = 90.dp).padding(0.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {

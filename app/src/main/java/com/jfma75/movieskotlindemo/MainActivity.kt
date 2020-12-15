@@ -1,11 +1,7 @@
 package com.jfma75.movieskotlindemo
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.Crossfade
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.navigation.NavType
@@ -15,10 +11,8 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
-import com.jfma75.movieskotlindemo.screens.HomeScreenContent
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
 import com.jfma75.movieskotlindemo.theme.AppTheme
-import dagger.hilt.android.AndroidEntryPoint
 
 var movies = listOf(
     listOf(
@@ -39,7 +33,7 @@ var movies = listOf(
     )
 )
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

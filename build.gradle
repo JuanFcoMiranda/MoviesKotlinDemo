@@ -1,27 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+import com.jfma75.buildsrc.Libs
+
 buildscript {
-    ext {
-        kotlin_version = "1.4.20"
-        lifecycle_version = "2.2.0"
-        hilt_version = '2.29.1-alpha'
-    }
-
-    def nav_release_version = "alpha03"
-    def compose_release_version = "alpha08"
-    ext.compose_version = "1.0.0-$compose_release_version"
-    ext.nav_compose_version = "1.0.0-$nav_release_version"
-    ext.compose_compiler_extension_version = "1.0.0-$compose_release_version"
-
-    repositories {
+      repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha02'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.hiltAndroidGradlePlugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
