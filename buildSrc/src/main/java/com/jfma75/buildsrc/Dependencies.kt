@@ -56,6 +56,11 @@ object Libs {
         const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleSavedstateVersion"
     }
 
+    object Android {
+        const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    }
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
         const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"

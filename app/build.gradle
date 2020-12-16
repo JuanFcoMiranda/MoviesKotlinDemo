@@ -5,7 +5,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "kotlin-kapt"
-    //id "dagger.hilt.android.plugin"
+    id "dagger.hilt.android.plugin"
 }
 
 android {
@@ -36,6 +36,11 @@ android {
     composeOptions {
         kotlinCompilerVersion Versions.kotlinVersion
         kotlinCompilerExtensionVersion Versions.composeVersion
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
@@ -73,9 +78,8 @@ dependencies {
     implementation Libs.Lifecycle.compose
     implementation Libs.Lifecycle.savedState
 
-    /*implementation "com.google.dagger:hilt-android:$hilt_version"
-    implementation "androidx.navigation:navigation-runtime-ktx:2.3.2"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"*/
+    implementation Libs.Android.hilt
+    kapt Libs.Android.hiltCompiler
 
     testImplementation "junit:junit:4.13.1"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"

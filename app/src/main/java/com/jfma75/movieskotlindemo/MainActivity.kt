@@ -1,6 +1,7 @@
 package com.jfma75.movieskotlindemo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
@@ -13,6 +14,8 @@ import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
 import com.jfma75.movieskotlindemo.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 var movies = listOf(
     listOf(
@@ -33,10 +36,14 @@ var movies = listOf(
     )
 )
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @Inject
+    lateinit var randomString : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainActivity", randomString)
         setContent {
             App()
         }
