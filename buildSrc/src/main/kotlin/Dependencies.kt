@@ -4,6 +4,7 @@ import Versions.appCompatVersion
 import Versions.composeActivityVersion
 import Versions.composeConstraintVersion
 import Versions.composeNavigationVersion
+import Versions.composePaging
 import Versions.composeVersion
 import Versions.coreKtxVersion
 import Versions.coroutinesVersion
@@ -84,6 +85,7 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout:$composeVersion"
             const val material = "androidx.compose.material:material:$composeVersion"
             const val navigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
+            const val paging = "androidx.paging:paging-compose:$composePaging"
             const val runtime = "androidx.compose.runtime:runtime:$composeVersion"
             const val tooling = "androidx.compose.ui:ui-tooling:$composeVersion"
             const val ui = "androidx.compose.ui:ui:$composeVersion"

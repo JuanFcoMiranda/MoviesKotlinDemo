@@ -17,7 +17,7 @@
 repositories {
     google()
     mavenCentral()
-    //jcenter()
+    jcenter()
 }
 
 plugins {
