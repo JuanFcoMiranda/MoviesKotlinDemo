@@ -10,7 +10,7 @@ object Versions {
 
     const val coroutinesVersion = "1.4.1"
 
-    const val androidGradlePluginVersion = "7.0.0-alpha10"
+    const val androidGradlePluginVersion = "7.0.0-alpha11"
 
     const val activityVersion = "1.2.0-beta02"
     const val appCompatVersion = "1.3.0-alpha02"
