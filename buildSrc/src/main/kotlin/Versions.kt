@@ -1,25 +1,28 @@
 object Versions {
     const val ktlint = "0.39.0"
-    private const val composeNavigation = "alpha09"
-    private const val compose_release_version = "beta03"
-    const val kotlinVersion = "1.4.31"
+    private const val composeNavigation = "alpha10"
+    private const val compose_release_version = "beta05"
+    const val kotlinVersion = "1.4.32"
 
     const val composeVersion = "1.0.0-$compose_release_version"
-    const val composeActivityVersion = "1.3.0-alpha04"
+    const val composeActivityVersion = "1.3.0-alpha06"
     const val composeNavigationVersion = "1.0.0-$composeNavigation"
 
-    const val coroutinesVersion = "1.4.1"
+    const val coroutinesVersion = "1.4.3"
 
-    const val androidGradlePluginVersion = "7.0.0-alpha12"
+    const val collectionsImmutableVersion = "0.3.4"
 
-    const val activityVersion = "1.2.0-beta02"
+    const val androidGradlePluginVersion = "7.0.0-alpha15"
+
+    const val activityVersion = composeActivityVersion
     const val appCompatVersion = "1.3.0-alpha02"
-    const val composeConstraintVersion = "1.0.0-alpha03"
+    const val composeConstraintVersion = "1.0.0-alpha05"
     const val composePaging = "1.0.0-alpha08"
     const val coreKtxVersion = "1.5.0-beta03"
-    const val dataStoreVersion = "1.0.0-alpha08"
-    const val hiltVersion = "2.33-beta"
-    const val lifecycleVersion = "2.2.0"
+    const val dataStoreVersion = "1.0.0-beta01"
+    const val hiltVersion = "2.34-beta"
+    const val lifecycleVersion = "2.4.0-alpha01"
+    const val lifecycleRuntimeVersion = lifecycleVersion
     const val lifecycleSavedstateVersion = "2.3.0-beta01"
 
     const val testsVersion = "1.2.0"

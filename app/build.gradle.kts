@@ -9,13 +9,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
+    compileSdk = 30
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.jfma75.movieskotlindemo"
-        minSdkVersion (23)
-        targetSdkVersion (30)
+        minSdk = 23
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
@@ -34,7 +34,6 @@ android {
     }
 
     composeOptions {
-        //kotlinCompilerVersion = Versions.kotlinVersion
         kotlinCompilerExtensionVersion = Versions.composeVersion
     }
 
@@ -43,10 +42,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    kotlinOptions {
+        jvmTarget = "${JavaVersion.VERSION_11}"
+        useIR = true
+    }
+
     tasks.withType(KotlinCompile::class).configureEach {
         kotlinOptions.useIR = true
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-        //kotlinOptions.freeCompilerArgs += "-Xallow-jvm-ir-dependencies" + "-Xskip-prerelease-check"
+        kotlinOptions.jvmTarget = "${JavaVersion.VERSION_11}"
     }
 }
 
@@ -54,34 +57,34 @@ dependencies {
     //implementation(fileTree("libs") { include(listOf("*.jar")) })
 
     implementation (Libs.Kotlin.stdlib)
-    implementation (Libs.Coroutines.android)
-    implementation (Libs.Coroutines.core)
+    implementation (Libs.Kotlin.collectionsImmutable)
+
+    implementation (Libs.KotlinX.Coroutines.android)
+    implementation (Libs.KotlinX.Coroutines.core)
 
     implementation (Libs.AndroidX.appCompat)
     implementation (Libs.AndroidX.activity)
-    implementation (Libs.AndroidX.coreKtx)
+    implementation (Libs.AndroidX.core)
+    implementation (Libs.AndroidX.datastore)
 
     implementation (Libs.AndroidX.Compose.animation)
     implementation (Libs.AndroidX.Compose.activity)
     implementation (Libs.AndroidX.Compose.foundation)
     implementation (Libs.AndroidX.Compose.iconsExtended)
     implementation (Libs.AndroidX.Compose.layout)
+    implementation (Libs.AndroidX.Compose.livedata)
     implementation (Libs.AndroidX.Compose.material)
     implementation (Libs.AndroidX.Compose.navigation)
     implementation (Libs.AndroidX.Compose.ui)
     implementation (Libs.AndroidX.Compose.runtime)
     implementation (Libs.AndroidX.Compose.tooling)
 
-    implementation (Libs.AndroidX.datastore)
+    implementation (Libs.AndroidX.Lifecycle.livedata)
+    implementation (Libs.AndroidX.Lifecycle.savedState)
+    implementation (Libs.AndroidX.Lifecycle.viewmodel)
 
-    implementation (Libs.Lifecycle.livedata)
-    implementation (Libs.Lifecycle.viewmodel)
-
-    implementation (Libs.Lifecycle.compose)
-    implementation (Libs.Lifecycle.savedState)
-
-    implementation (Libs.Android.hilt)
-    kapt (Libs.Android.hiltCompiler)
+    implementation (Libs.Google.Android.hilt)
+    kapt (Libs.Google.Android.hiltCompiler)
 
     testImplementation (Libs.AndroidX.Test.junit)
     androidTestImplementation (Libs.AndroidX.Test.Ext.junit)

@@ -1,6 +1,7 @@
 import Versions.activityVersion
 import Versions.androidGradlePluginVersion
 import Versions.appCompatVersion
+import Versions.collectionsImmutableVersion
 import Versions.composeActivityVersion
 import Versions.composeConstraintVersion
 import Versions.composeNavigationVersion
@@ -14,6 +15,7 @@ import Versions.hiltVersion
 import Versions.jUnit
 import Versions.jUnitVersion
 import Versions.kotlinVersion
+import Versions.lifecycleRuntimeVersion
 import Versions.lifecycleSavedstateVersion
 import Versions.lifecycleVersion
 import Versions.navigationVersion
@@ -36,45 +38,21 @@ import Versions.testsVersion
  */
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:$androidGradlePluginVersion"
-    const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
-
-    object Kotlin {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
-    }
-
-    object Coroutines {
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-    }
-
-    object Lifecycle {
-        const val compose = "androidx.compose.runtime:runtime-livedata:$composeVersion"
-        const val extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-        const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleSavedstateVersion"
-    }
-
     object Android {
-        const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
-        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+        const val androidGradlePlugin = "com.android.tools.build:gradle:$androidGradlePluginVersion"
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:$coreKtxVersion"
+        const val core = "androidx.core:core-ktx:$coreKtxVersion"
         const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
         const val activity = "androidx.activity:activity-ktx:$activityVersion"
         const val datastore = "androidx.datastore:datastore-core:$dataStoreVersion"
 
         object Compose {
-            const val snapshot = ""
+            const val livedata = "androidx.compose.runtime:runtime-livedata:$composeVersion"
 
             const val activity = "androidx.activity:activity-compose:$composeActivityVersion"
-            const val constraint = "androidx.activity:activity-compose:$composeConstraintVersion"
+            const val constraintLayout = "androidx.constraintlauout:constraintlauout-compose:$composeConstraintVersion"
 
             const val animation = "androidx.compose.animation:animation:$composeVersion"
             const val animationCore = "androidx.compose.animation:animation-core:$composeVersion"
@@ -92,17 +70,47 @@ object Libs {
             const val uiUtil = "androidx.compose.ui:ui-util:$composeVersion"
         }
 
+        object Lifecycle {
+            const val extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeVersion"
+            const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+            const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleSavedstateVersion"
+        }
+
         object Test {
             const val core = "androidx.test:core:$testsVersion"
-            const val rules = "androidx.test:rules:$testsVersion"
+            const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
             const val junit = "junit:junit:$jUnit"
+            const val navigation = "androidx.navigation:navigation-testing:$navigationVersion"
+            const val rules = "androidx.test:rules:$testsVersion"
 
             object Ext {
                 const val junit = "androidx.test.ext:junit-ktx:$jUnitVersion"
             }
+        }
+    }
 
-            const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
-            const val navigation = "androidx.navigation:navigation-testing:$navigationVersion"
+    object Google {
+        object Android {
+            const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+            const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
+            const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+        }
+    }
+
+    object Kotlin {
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        const val collectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:$collectionsImmutableVersion"
+    }
+
+    object KotlinX {
+        object Coroutines {
+            const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
         }
     }
 }
