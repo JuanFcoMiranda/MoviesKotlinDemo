@@ -1,7 +1,8 @@
 object Versions {
     const val ktlint = "0.39.0"
+    const val serializationPluginVersion = "1.5.0"
     private const val composeNavigation = "alpha10"
-    private const val compose_release_version = "beta05"
+    private const val compose_release_version = "beta06"
     const val kotlinVersion = "1.4.32"
 
     const val composeVersion = "1.0.0-$compose_release_version"
@@ -12,7 +13,7 @@ object Versions {
 
     const val collectionsImmutableVersion = "0.3.4"
 
-    const val androidGradlePluginVersion = "7.0.0-alpha15"
+    const val androidGradlePluginVersion = "7.0.0-beta02"
 
     const val activityVersion = composeActivityVersion
     const val appCompatVersion = "1.3.0-alpha02"

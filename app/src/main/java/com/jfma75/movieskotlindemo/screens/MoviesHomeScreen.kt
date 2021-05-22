@@ -32,7 +32,7 @@ import com.jfma75.movieskotlindemo.theme.lightThemeColors
 
 @ExperimentalFoundationApi
 @Composable
-fun MoviesHomeScreen(navController: NavHostController) {
+fun MoviesHomeScreen(onMovieClick : (Movie) -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,25 +45,25 @@ fun MoviesHomeScreen(navController: NavHostController) {
                 }
             )
         }) {
-        HomeScreenContent(navController)
+        HomeScreenContent(onMovieClick = onMovieClick)
     }
 }
 
 @ExperimentalFoundationApi
 @Composable
-fun HomeScreenContent(navController: NavHostController) {
+fun HomeScreenContent(onMovieClick : (Movie) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2)
     ) {
         items(movies.size) { index ->
             val movie = movies[index]
-            MovieView(movie, navController)
+            MovieView(movie, onMovieClick)
         }
     }
 }
 
 @Composable
-fun MovieView(movie: Movie, navController: NavHostController) {
+fun MovieView(movie: Movie, onMovieClick :(Movie) -> Unit) {
     Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier.size(width = 160.dp, height = 230.dp)) {
             Image(
@@ -81,7 +81,7 @@ fun MovieView(movie: Movie, navController: NavHostController) {
         Spacer(Modifier.height(8.dp))
         Button(
             modifier = Modifier.shadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
-            onClick = { navController.navigate("BuyTickets/${movie.id}L") }
+            onClick = { onMovieClick(movie) }
         ) {
             Text(
                 text = "Buy Tickets",
@@ -96,7 +96,6 @@ fun MovieView(movie: Movie, navController: NavHostController) {
 @ExperimentalFoundationApi
 fun MoviesHomeScreen_Preview() {
     MaterialTheme(colors = lightThemeColors) {
-        val navController = rememberNavController()
-        MoviesHomeScreen(navController = navController)
+        MoviesHomeScreen(onMovieClick = {})
     }
 }

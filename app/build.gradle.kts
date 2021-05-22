@@ -67,6 +67,9 @@ dependencies {
     implementation (Libs.AndroidX.core)
     implementation (Libs.AndroidX.datastore)
 
+    implementation(Libs.KotlinX.Serialization.json)
+    implementation(Libs.KotlinX.Datetime.datetime)
+
     implementation (Libs.AndroidX.Compose.animation)
     implementation (Libs.AndroidX.Compose.activity)
     implementation (Libs.AndroidX.Compose.foundation)

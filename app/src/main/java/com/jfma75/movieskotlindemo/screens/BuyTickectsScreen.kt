@@ -36,7 +36,7 @@ import java.util.*
 var selectedDate by mutableStateOf(Date())
 
 @Composable
-fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
+fun BuyTicketsScreen(movieId: Long, upPress: () -> Unit) {
     val movie = movies.first { movie -> movie.id == movieId }
 
     Scaffold(
@@ -50,7 +50,7 @@ fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack(navController.graph.startDestination, false) }) {
+                    IconButton(onClick = { upPress() }) {
                         Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
                     }
                 }
@@ -156,7 +156,9 @@ fun DayButtonView(day: Date) {
                 else -> { colors.secondary }
             }
         ),
-        modifier = Modifier.size(width = 70.dp, height = 90.dp).padding(0.dp)
+        modifier = Modifier
+            .size(width = 70.dp, height = 90.dp)
+            .padding(0.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Text(
@@ -226,9 +228,8 @@ fun DayButtonView(day: Date) {
 @Preview
 @Composable
 fun BuyTickets_Preview() {
-    val navController = rememberNavController()
     MaterialTheme(colors = lightThemeColors) {
-        BuyTicketsScreen(navController, movies.first().id)
+        BuyTicketsScreen(movies.first().id, { })
     }
    /* MaterialTheme(colors = darkThemeColors) {
         BuyTicketsScreen(navController, movies.first().id)

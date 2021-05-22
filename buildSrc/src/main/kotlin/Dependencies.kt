@@ -19,6 +19,7 @@ import Versions.lifecycleRuntimeVersion
 import Versions.lifecycleSavedstateVersion
 import Versions.lifecycleVersion
 import Versions.navigationVersion
+import Versions.serializationPluginVersion
 import Versions.testsVersion
 
 /*
@@ -102,6 +103,7 @@ object Libs {
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$serializationPluginVersion"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         const val collectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:$collectionsImmutableVersion"
     }
@@ -111,6 +113,14 @@ object Libs {
             const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
             const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
             const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+        }
+
+        object Datetime {
+            const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.2.0"
+        }
+
+        object Serialization {
+            const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
         }
     }
 }

@@ -7,10 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.*
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen
@@ -59,10 +56,20 @@ private fun AppContent() {
 
     NavHost(navController, startDestination = "Home") {
         composable("Home") {
-            MoviesHomeScreen(navController)
+            MoviesHomeScreen(onMovieClick = { movie ->
+                navController.navigate("BuyTickets/${movie.id}")
+            })
         }
-        composable("BuyTickets/{movieId}", arguments = listOf(navArgument("movieId") { type = NavType.LongType })) { backStack ->
-            BuyTicketsScreen(navController, backStack.arguments?.getLong("movieId"))
+        composable(
+            route = "BuyTickets/{movieId}",
+            arguments = listOf(navArgument("movieId") { type = NavType.LongType })) { backStackEntry ->
+            val arguments = requireNotNull(backStackEntry.arguments)
+            val movieId = arguments.getLong("movieId")
+
+            BuyTicketsScreen(
+                movieId = movieId,
+                upPress = { navController.navigateUp() }
+            )
         }
     }
 }
