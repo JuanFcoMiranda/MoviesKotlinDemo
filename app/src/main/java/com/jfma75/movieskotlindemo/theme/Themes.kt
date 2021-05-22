@@ -28,15 +28,13 @@ val lightThemeColors = lightColors(
 val darkThemeColors = darkColors(
     primary = FunctionalRedDark,
     primaryVariant = FuncionalRedDark2,
-    onPrimary = Color.White,
     secondary = Neutral8,
     onSecondary = Color.White,
     background = Neutral8,
     onBackground = Color.White,
     surface = Neutral8,
     onSurface = Color.White,
-    error = FuncionalRedDark2,
-    onError = Color.Black
+    error = FuncionalRedDark2
 )
 
 @Composable
