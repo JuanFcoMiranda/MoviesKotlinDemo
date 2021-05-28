@@ -19,9 +19,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.rememberNavController
+import androidx.paging.compose.LazyPagingItems
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.movies
 import com.jfma75.movieskotlindemo.theme.lightThemeColors
@@ -32,7 +30,7 @@ import com.jfma75.movieskotlindemo.theme.lightThemeColors
 
 @ExperimentalFoundationApi
 @Composable
-fun MoviesHomeScreen(onMovieClick : (Movie) -> Unit) {
+fun MoviesHomeScreen(movies: LazyPagingItems<Movie>, onMovieClick: (Movie) -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -45,48 +43,44 @@ fun MoviesHomeScreen(onMovieClick : (Movie) -> Unit) {
                 }
             )
         }) {
-        HomeScreenContent(onMovieClick = onMovieClick)
+        HomeScreenContent(movies, onMovieClick = onMovieClick)
     }
 }
 
 @ExperimentalFoundationApi
 @Composable
-fun HomeScreenContent(onMovieClick : (Movie) -> Unit) {
+fun HomeScreenContent(movies: LazyPagingItems<Movie>, onMovieClick: (Movie) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2)
     ) {
-        items(movies.size) { index ->
-            val movie = movies[index]
-            MovieView(movie, onMovieClick)
-        }
-    }
-}
+        items(movies.itemCount) { index ->
+            val movie = com.jfma75.movieskotlindemo.movies[index]
 
-@Composable
-fun MovieView(movie: Movie, onMovieClick :(Movie) -> Unit) {
-    Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(modifier = Modifier.size(width = 160.dp, height = 230.dp)) {
-            Image(
-                painterResource(movie.imageId),
-                contentDescription = "",
-                modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Fit
-            )
-        }
-        Spacer(Modifier.height(8.dp))
-        Text(
-            text = movie.name,
-            style = MaterialTheme.typography.body1
-        )
-        Spacer(Modifier.height(8.dp))
-        Button(
-            modifier = Modifier.shadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
-            onClick = { onMovieClick(movie) }
-        ) {
-            Text(
-                text = "Buy Tickets",
-                style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
-            )
+            Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Box(modifier = Modifier.size(width = 160.dp, height = 230.dp)) {
+                    Image(
+                        painterResource(movie.imageId),
+                        contentDescription = "",
+                        modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.Fit
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = movie.name,
+                    style = MaterialTheme.typography.body1
+                )
+                Spacer(Modifier.height(8.dp))
+                Button(
+                    modifier = Modifier.shadow(elevation = 12.dp, shape = RoundedCornerShape(8.dp), clip = true),
+                    onClick = { onMovieClick(movie) }
+                ) {
+                    Text(
+                        text = "Buy Tickets",
+                        style = TextStyle(color = Color.White, fontWeight = FontWeight.Bold)
+                    )
+                }
+            }
         }
     }
 }
@@ -96,6 +90,6 @@ fun MovieView(movie: Movie, onMovieClick :(Movie) -> Unit) {
 @ExperimentalFoundationApi
 fun MoviesHomeScreen_Preview() {
     MaterialTheme(colors = lightThemeColors) {
-        MoviesHomeScreen(onMovieClick = {})
+        //MoviesHomeScreen(movies = movies) {}
     }
 }

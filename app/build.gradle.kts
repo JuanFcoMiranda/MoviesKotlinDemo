@@ -4,7 +4,7 @@ plugins {
     id ("com.android.application")
     id ("kotlin-android")
     id ("kotlin-kapt")
-    id ("kotlin-parcelize")
+    //id ("kotlin-parcelize")
     id ("dagger.hilt.android.plugin")
 }
 
@@ -57,7 +57,6 @@ dependencies {
     //implementation(fileTree("libs") { include(listOf("*.jar")) })
 
     implementation (Libs.Kotlin.stdlib)
-    implementation (Libs.Kotlin.collectionsImmutable)
 
     implementation (Libs.KotlinX.Coroutines.android)
     implementation (Libs.KotlinX.Coroutines.core)
@@ -67,8 +66,8 @@ dependencies {
     implementation (Libs.AndroidX.core)
     implementation (Libs.AndroidX.datastore)
 
-    implementation(Libs.KotlinX.Serialization.json)
-    implementation(Libs.KotlinX.Datetime.datetime)
+    //implementation(Libs.KotlinX.Serialization.json)
+    //implementation(Libs.KotlinX.Datetime.datetime)
 
     implementation (Libs.AndroidX.Compose.animation)
     implementation (Libs.AndroidX.Compose.activity)
@@ -77,6 +76,7 @@ dependencies {
     implementation (Libs.AndroidX.Compose.layout)
     implementation (Libs.AndroidX.Compose.livedata)
     implementation (Libs.AndroidX.Compose.material)
+    implementation (Libs.AndroidX.Compose.paging)
     implementation (Libs.AndroidX.Compose.navigation)
     implementation (Libs.AndroidX.Compose.ui)
     implementation (Libs.AndroidX.Compose.runtime)

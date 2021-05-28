@@ -19,7 +19,7 @@ import Versions.lifecycleRuntimeVersion
 import Versions.lifecycleSavedstateVersion
 import Versions.lifecycleVersion
 import Versions.navigationVersion
-import Versions.serializationPluginVersion
+//import Versions.serializationPluginVersion
 import Versions.testsVersion
 
 /*
@@ -64,6 +64,7 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout:$composeVersion"
             const val material = "androidx.compose.material:material:$composeVersion"
             const val navigation = "androidx.navigation:navigation-compose:$composeNavigationVersion"
+
             const val paging = "androidx.paging:paging-compose:$composePaging"
             const val runtime = "androidx.compose.runtime:runtime:$composeVersion"
             const val tooling = "androidx.compose.ui:ui-tooling:$composeVersion"
@@ -103,7 +104,7 @@ object Libs {
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$serializationPluginVersion"
+        //const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$serializationPluginVersion"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         const val collectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:$collectionsImmutableVersion"
     }

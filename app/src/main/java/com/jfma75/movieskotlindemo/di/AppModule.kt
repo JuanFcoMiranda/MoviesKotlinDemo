@@ -15,8 +15,4 @@ object AppModule {
     @Singleton
     @Provides
     fun providesApplication(@ApplicationContext app: Context) : MoviesKotlinDemoApp = app as MoviesKotlinDemoApp
-
-    @Singleton
-    @Provides
-    fun providesRandomString() : String = "asjdflkasjflkjslkfjslkfjlkasdf"
 }
