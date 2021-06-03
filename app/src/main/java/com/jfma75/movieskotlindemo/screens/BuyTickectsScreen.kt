@@ -206,7 +206,7 @@ fun DayButtonView(day: Date) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = day.formatToViewDateDefaults("EEEE").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("EEEE").uppercase(),
                 modifier = Modifier.wrapContentSize(align = Alignment.Center),
                 maxLines = 1,
                 style = MaterialTheme.typography.overline.merge(
