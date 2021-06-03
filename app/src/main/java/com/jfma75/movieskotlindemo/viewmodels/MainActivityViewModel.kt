@@ -7,7 +7,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.jfma75.movieskotlindemo.data.IMovieRepository
-import com.jfma75.movieskotlindemo.data.MovieRepository
 import com.jfma75.movieskotlindemo.data.MovieSource
 import com.jfma75.movieskotlindemo.models.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,14 +22,14 @@ class MainActivityViewModel @Inject constructor(private val movieRepository: IMo
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false,
                 prefetchDistance = 4,
-                initialLoadSize = 30
+                initialLoadSize = 8
             ),
-            //remoteMediator = PhotosRemoteMediator(service = photosApi, database = database),
+            //remoteMediator = MoviesRemoteMediator(service = photosApi, database = database),
             pagingSourceFactory = pagingSourceFactory
         ).flow.cachedIn(viewModelScope)
     }
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 30
+        private const val NETWORK_PAGE_SIZE = 8
     }
 }

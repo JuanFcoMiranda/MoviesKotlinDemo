@@ -35,6 +35,7 @@ import java.util.*
 
 var selectedDate by mutableStateOf(Date())
 
+@ExperimentalStdlibApi
 @Composable
 fun BuyTicketsScreen(movieId: Long, upPress: () -> Unit) {
     val movie = movies.first { movie -> movie.id == movieId }
@@ -68,6 +69,7 @@ fun BuyTicketsScreen(movieId: Long, upPress: () -> Unit) {
     }
 }
 
+@ExperimentalStdlibApi
 @Composable
 fun HeaderView(movie: Movie) {
     val colors = MaterialTheme.colors
@@ -86,7 +88,7 @@ fun HeaderView(movie: Movie) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
-                    text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").toUpperCase(Locale.ROOT),
+                    text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").uppercase(),
                     style = MaterialTheme.typography.subtitle2.merge(
                         TextStyle(
                             color = colors.secondary,
@@ -126,6 +128,7 @@ fun getCalendars(): List<List<Date?>> {
     }.chunked(5)
 }
 
+@ExperimentalStdlibApi
 @Composable
 fun CalendarView() {
     val days = getCalendars()
@@ -144,6 +147,7 @@ fun CalendarView() {
     }
 }
 
+@ExperimentalStdlibApi
 @Composable
 fun DayButtonView(day: Date) {
     val colors = MaterialTheme.colors
@@ -162,7 +166,7 @@ fun DayButtonView(day: Date) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Text(
-                text = day.formatToViewDateDefaults("MMM").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("MMM").uppercase(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
@@ -182,7 +186,7 @@ fun DayButtonView(day: Date) {
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = day.formatToViewDateDefaults("dd").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("dd").uppercase(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.overline.merge(
                     TextStyle(
@@ -225,11 +229,12 @@ fun DayButtonView(day: Date) {
     }
 }
 
+@ExperimentalStdlibApi
 @Preview
 @Composable
 fun BuyTickets_Preview() {
     MaterialTheme(colors = lightThemeColors) {
-        BuyTicketsScreen(movies.first().id, { })
+        BuyTicketsScreen(movies.first().id) { }
     }
    /* MaterialTheme(colors = darkThemeColors) {
         BuyTicketsScreen(navController, movies.first().id)

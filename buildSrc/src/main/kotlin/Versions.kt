@@ -2,8 +2,8 @@ object Versions {
     const val ktlint = "0.39.0"
     //const val serializationPluginVersion = "1.5.0"
     private const val composeNavigation = "alpha01"
-    private const val compose_release_version = "beta07"
-    const val kotlinVersion = "1.4.32"
+    private const val compose_release_version = "beta08"
+    const val kotlinVersion = "1.5.10"
 
     const val composeVersion = "1.0.0-$compose_release_version"
     const val composeActivityVersion = "1.3.0-alpha06"
