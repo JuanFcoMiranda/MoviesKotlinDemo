@@ -51,6 +51,7 @@ var movies = listOf(
     Movie(31, "Tomb Raider", "Action", R.drawable.tomb_raider)
 )
 
+@ExperimentalStdlibApi
 @ExperimentalFoundationApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+@ExperimentalStdlibApi
 @ExperimentalFoundationApi
 @Composable
 private fun AppContent(viewModel: MainActivityViewModel) {
