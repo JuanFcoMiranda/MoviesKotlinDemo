@@ -4,7 +4,6 @@ plugins {
     id ("com.android.application")
     id ("kotlin-android")
     id ("kotlin-kapt")
-    //id ("kotlin-parcelize")
     id ("dagger.hilt.android.plugin")
 }
 
@@ -44,13 +43,11 @@ android {
 
     kotlinOptions {
         jvmTarget = "${JavaVersion.VERSION_11}"
-        useIR = true
     }
-
+/*
     tasks.withType(KotlinCompile::class).configureEach {
-        kotlinOptions.useIR = true
         kotlinOptions.jvmTarget = "${JavaVersion.VERSION_11}"
-    }
+    }*/
 }
 
 dependencies {

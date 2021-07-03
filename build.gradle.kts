@@ -7,12 +7,12 @@ buildscript {
     }
 
     dependencies {
-        classpath(Libs.Android.androidGradlePlugin)
-        classpath(Libs.Kotlin.gradlePlugin)
+        classpath(Plugins.Android.gradle)
+        classpath(Plugins.Kotlin.gradle)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath(Libs.Google.Android.hiltAndroidGradlePlugin)
-        //classpath (Libs.Kotlin.serializationPlugin)
+        classpath(Plugins.Google.Hilt.Android.gradle)
+        //classpath (Plugins.Kotlin.serializationPlugin)
     }
 }
 

@@ -9,6 +9,7 @@ import Versions.composePaging
 import Versions.composeVersion
 import Versions.coreKtxVersion
 import Versions.coroutinesVersion
+import Versions.daggerVersion
 import Versions.dataStoreVersion
 import Versions.espressoVersion
 import Versions.hiltVersion
@@ -18,6 +19,7 @@ import Versions.kotlinVersion
 import Versions.lifecycleRuntimeVersion
 import Versions.lifecycleSavedstateVersion
 import Versions.lifecycleVersion
+import Versions.materialVersion
 import Versions.navigationVersion
 //import Versions.serializationPluginVersion
 import Versions.testsVersion
@@ -39,10 +41,6 @@ import Versions.testsVersion
  */
 
 object Libs {
-    object Android {
-        const val androidGradlePlugin = "com.android.tools.build:gradle:$androidGradlePluginVersion"
-    }
-
     object AndroidX {
         const val core = "androidx.core:core-ktx:$coreKtxVersion"
         const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
@@ -95,16 +93,23 @@ object Libs {
 
     object Google {
         object Android {
-            const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
             const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
             const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+            object Material {
+                const val material = "com.google.android.material:material:$materialVersion"
+            }
+        }
+
+        object Dagger {
+            const val core = "com.google.dagger:dagger:$daggerVersion"
+            const val compiler = "com.google.dagger:dagger-compiler:$daggerVersion"
         }
     }
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        //const val serializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$serializationPluginVersion"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         const val collectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:$collectionsImmutableVersion"
     }
