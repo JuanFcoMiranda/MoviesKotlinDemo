@@ -1,5 +1,4 @@
 import Versions.activityVersion
-import Versions.androidGradlePluginVersion
 import Versions.appCompatVersion
 import Versions.collectionsImmutableVersion
 import Versions.composeActivityVersion
@@ -21,7 +20,6 @@ import Versions.lifecycleSavedstateVersion
 import Versions.lifecycleVersion
 import Versions.materialVersion
 import Versions.navigationVersion
-//import Versions.serializationPluginVersion
 import Versions.testsVersion
 
 /*
@@ -93,9 +91,6 @@ object Libs {
 
     object Google {
         object Android {
-            const val hilt = "com.google.dagger:hilt-android:$hiltVersion"
-            const val hiltCompiler = "com.google.dagger:hilt-android-compiler:$hiltVersion"
-
             object Material {
                 const val material = "com.google.android.material:material:$materialVersion"
             }
@@ -105,11 +100,15 @@ object Libs {
             const val core = "com.google.dagger:dagger:$daggerVersion"
             const val compiler = "com.google.dagger:dagger-compiler:$daggerVersion"
         }
+
+        object Hilt {
+            const val core = "com.google.dagger:hilt-android:$hiltVersion"
+            const val compiler = "com.google.dagger:hilt-compiler:$hiltVersion"
+        }
     }
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
         const val collectionsImmutable = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:$collectionsImmutableVersion"
     }

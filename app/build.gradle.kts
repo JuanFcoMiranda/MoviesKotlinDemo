@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id ("com.android.application")
     id ("kotlin-android")
@@ -44,10 +42,6 @@ android {
     kotlinOptions {
         jvmTarget = "${JavaVersion.VERSION_11}"
     }
-/*
-    tasks.withType(KotlinCompile::class).configureEach {
-        kotlinOptions.jvmTarget = "${JavaVersion.VERSION_11}"
-    }*/
 }
 
 dependencies {
@@ -83,8 +77,8 @@ dependencies {
     implementation (Libs.AndroidX.Lifecycle.savedState)
     implementation (Libs.AndroidX.Lifecycle.viewmodel)
 
-    implementation (Libs.Google.Android.hilt)
-    kapt (Libs.Google.Android.hiltCompiler)
+    implementation (Libs.Google.Hilt.core)
+    kapt (Libs.Google.Hilt.compiler)
 
     testImplementation (Libs.AndroidX.Test.junit)
     androidTestImplementation (Libs.AndroidX.Test.Ext.junit)
