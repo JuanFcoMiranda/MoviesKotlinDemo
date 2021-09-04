@@ -1,10 +1,10 @@
 object Versions {
     const val ktlint = "0.39.0"
 
-    const val androidGradlePluginVersion = "7.0.0"
+    const val androidGradlePluginVersion = "7.0.2"
     const val serializationPluginVersion = "1.5.10"
 
-    const val kotlinVersion = "1.5.10"
+    const val kotlinVersion = "1.5.21"
 
     const val coroutinesVersion = "1.4.3"
 
@@ -15,7 +15,7 @@ object Versions {
     const val coreKtxVersion = "1.5.0-beta03"
     const val dataStoreVersion = "1.0.0-rc02"
 
-    const val composeVersion = "1.0.0"
+    const val composeVersion = "1.0.2"
     const val composeActivityVersion = activityVersion
     const val composeNavigationVersion = "2.4.0-alpha05"
     const val composeConstraintVersion = "1.0.0-beta01"
