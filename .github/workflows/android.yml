@@ -8,7 +8,7 @@ on:
 
 env:
     JDK_VERSION: 17
-    JDK_DISTRIBUTION: 'temurin'
+    JDK_DISTRIBUTION: temurin
 
 jobs:
   build:
@@ -20,8 +20,10 @@ jobs:
     - name: Setup JDK {{ env.JDK_VERSION }}
       uses: actions/setup-java@v4
       with:
-        java-version: 17
-        distribution: 'temurin'
+        java-version: {{ env.JDK_VERSION }}
+        distribution: {{ env.JDK_DISTRIBUTION }}
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
     - name: Build APK
