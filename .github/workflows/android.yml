@@ -17,17 +17,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup JDK ${{ env.JDK_VERSION }}
       uses: actions/setup-java@v4
       with:
         java-version: 17
         distribution: temurin
+
     - name: Make gradlew executable
       run: chmod +x ./gradlew
+
     - name: Build with Gradle
       run: ./gradlew build
+
     - name: Build APK
       run: bash ./gradlew assembleDebug --stacktrace
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
