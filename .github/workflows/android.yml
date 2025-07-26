@@ -25,6 +25,9 @@ jobs:
         distribution: ${{ env.JDK_DISTRIBUTION }}
         cache: gradle
 
+    - name: Cache Gradle Wrapper Validation
+      uses: gradle/actions/wrapper-validation@v4
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
