@@ -31,6 +31,9 @@ jobs:
     - name: Cache Gradle Wrapper Validation
       uses: gradle/actions/wrapper-validation@v4
 
+    - name: Change Wrapper Permissions
+      run: chmod +x ./gradlew
+
     - name: Build with Gradle
       run: ./gradlew build
 
