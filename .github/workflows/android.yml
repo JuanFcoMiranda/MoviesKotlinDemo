@@ -8,6 +8,7 @@ on:
 
 env:
     JDK_VERSION: 17
+    JDK_DISTRIBUTION: 'temurin'
 
 jobs:
   build:
@@ -20,6 +21,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '{{ env.JDK_VERSION }}'
+        distribution: {{ env.JDK_DISTRIBUTION }}
     - name: Build with Gradle
       run: ./gradlew build
     - name: Build APK
