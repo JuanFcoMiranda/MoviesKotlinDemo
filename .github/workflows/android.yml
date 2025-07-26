@@ -21,7 +21,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '{{ env.JDK_VERSION }}'
-        distribution: {{ env.JDK_DISTRIBUTION }}
+        distribution: 'temurin'
     - name: Build with Gradle
       run: ./gradlew build
     - name: Build APK
