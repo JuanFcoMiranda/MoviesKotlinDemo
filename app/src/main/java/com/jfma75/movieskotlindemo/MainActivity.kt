@@ -2,14 +2,14 @@ package com.jfma75.movieskotlindemo
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.setContent
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.screens.BuyTicketsScreen
 import com.jfma75.movieskotlindemo.screens.MoviesHomeScreen

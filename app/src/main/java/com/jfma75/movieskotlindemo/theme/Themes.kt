@@ -1,15 +1,14 @@
 package com.jfma75.movieskotlindemo.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-val lightThemeColors = lightColors(
+val lightThemeColors = lightColorScheme(
     primary = FunctionalRed2,
-    primaryVariant = FunctionalRed3,
     onPrimary = Color.White,
     secondary = Color.White,
     onSecondary = Color.Black,
@@ -25,9 +24,8 @@ val lightThemeColors = lightColors(
  * Note: Dark Theme support is not yet available, it will come in 2020. This is just an example of
  * using dark colors.
  */
-val darkThemeColors = darkColors(
+val darkThemeColors = darkColorScheme(
     primary = FunctionalRedDark,
-    primaryVariant = FuncionalRedDark2,
     onPrimary = Color.White,
     secondary = Neutral8,
     onSecondary = Color.White,
@@ -42,7 +40,7 @@ val darkThemeColors = darkColors(
 @Composable
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
-        colors = if (darkTheme) darkThemeColors else lightThemeColors,
+        colorScheme = if (darkTheme) darkThemeColors else lightThemeColors,
         typography = themeTypography,
         shapes = Shapes,
         content = content

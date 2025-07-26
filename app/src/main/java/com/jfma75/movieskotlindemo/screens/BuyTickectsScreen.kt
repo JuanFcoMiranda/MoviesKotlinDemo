@@ -1,12 +1,19 @@
 package com.jfma75.movieskotlindemo.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,9 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +43,7 @@ import java.util.*
 
 var selectedDate by mutableStateOf(Date())
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
     val movie = movies.flatten().first { movie -> movie.id == movieId }
@@ -47,50 +54,54 @@ fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
                 title = {
                     Text(
                         text = movie.name,
-                        style = MaterialTheme.typography.subtitle1,
-                        color = AmbientContentColor.current
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack(navController.graph.startDestination, false) }) {
-                        Icon(Icons.Filled.ArrowBack)
+                    IconButton(onClick = { navController.popBackStack(navController.graph.startDestinationId, false) }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back to Movies List")
                     }
                 }
             )
-        },
-        bodyContent = {
-            Column(modifier = Modifier.fillMaxSize()) {
-                Row(Modifier.fillMaxWidth()) {
-                    HeaderView(movie = movie)
-                }
-                Row(Modifier.fillMaxWidth()) {
-                    CalendarView()
-                }
+        }
+    ) { paddingValues ->
+        Column(modifier = Modifier.padding(paddingValues).fillMaxSize()) {
+            Row(Modifier.fillMaxWidth()) {
+                HeaderView(movie = movie)
+            }
+            Row(Modifier.fillMaxWidth()) {
+                CalendarView()
             }
         }
-    )
+    }
 }
 
 @Composable
 fun HeaderView(movie: Movie) {
-    val colors = MaterialTheme.colors
+    val colors = MaterialTheme.colorScheme
 
     Column(modifier = Modifier.padding(8.dp)) {
-        Box(modifier = Modifier.preferredSize(height = 180.dp, width = 120.dp)) {
-            Image(imageResource(id = movie.imageId), Modifier.clip(shape = RoundedCornerShape(12.dp)), contentScale = ContentScale.Fit)
+        Box(modifier = Modifier.size(height = 180.dp, width = 120.dp)) {
+            Image(
+                painter = painterResource(id = movie.imageId),
+                modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Fit,
+                contentDescription = "Movie Poster"
+            )
         }
     }
     Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.Start) {
-        Text(text = movie.name, style = MaterialTheme.typography.h6)
-        Text(text = movie.genre, style = MaterialTheme.typography.body1)
+        Text(text = movie.name, style = MaterialTheme.typography.titleSmall)
+        Text(text = movie.genre, style = MaterialTheme.typography.bodyMedium)
 
-        Spacer(Modifier.preferredHeight(16.dp))
+        Spacer(Modifier.height(16.dp))
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
-                    text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").toUpperCase(Locale.ROOT),
-                    style = MaterialTheme.typography.subtitle2.merge(
+                    text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").uppercase(Locale.ROOT),
+                    style = MaterialTheme.typography.titleSmall.merge(
                         TextStyle(
                             color = colors.secondary,
                             fontSize = 12.sp
@@ -101,7 +112,7 @@ fun HeaderView(movie: Movie) {
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
                     text = "7:00 PM",
-                    style = MaterialTheme.typography.subtitle2.merge(
+                    style = MaterialTheme.typography.titleSmall.merge(
                         TextStyle(
                             color = colors.secondary,
                             fontSize = 12.sp
@@ -133,9 +144,9 @@ fun getCalendars(): List<List<Date?>> {
 fun CalendarView() {
     val days = getCalendars()
     Column(modifier = Modifier.padding(8.dp)) {
-        Text(text = "Select Date", style = MaterialTheme.typography.h5)
+        Text(text = "Select Date", style = MaterialTheme.typography.headlineSmall)
         days.forEach { row ->
-            Spacer(Modifier.preferredHeight(16.dp))
+            Spacer(Modifier.height(16.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                 row.forEach { day ->
                     if (day != null) {
@@ -149,23 +160,23 @@ fun CalendarView() {
 
 @Composable
 fun DayButtonView(day: Date) {
-    val colors = MaterialTheme.colors
+    val colors = MaterialTheme.colorScheme
 
     Button(
         onClick = { selectedDate = day },
         shape = RoundedCornerShape(12.dp),
-        colors = ButtonConstants.defaultButtonColors(backgroundColor = when {
+        colors = ButtonDefaults.buttonColors(containerColor = when {
                 day.formatToViewDateDefaults() == selectedDate.formatToViewDateDefaults() -> { colors.primary }
                 else -> { colors.secondary }
             }
         ),
-        modifier = Modifier.preferredSize(width = 70.dp, height = 90.dp).padding(0.dp)
+        modifier = Modifier.size(width = 70.dp, height = 90.dp).padding(0.dp)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Text(
-                text = day.formatToViewDateDefaults("MMM").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("MMM").uppercase(Locale.ROOT),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.overline.merge(
+                style = MaterialTheme.typography.bodySmall.merge(
                     TextStyle(
                         color = if (day.onlyDate() == selectedDate.onlyDate()) {
                             colors.secondary
@@ -181,11 +192,11 @@ fun DayButtonView(day: Date) {
                     )
                 )
             )
-            Spacer(Modifier.preferredHeight(8.dp))
+            Spacer(Modifier.height(8.dp))
             Text(
-                text = day.formatToViewDateDefaults("dd").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("dd").uppercase(Locale.ROOT),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.overline.merge(
+                style = MaterialTheme.typography.bodySmall.merge(
                     TextStyle(
                         color = if (day.onlyDate() == selectedDate.onlyDate()) {
                             colors.secondary
@@ -201,12 +212,12 @@ fun DayButtonView(day: Date) {
                     )
                 )
             )
-            Spacer(Modifier.preferredHeight(8.dp))
+            Spacer(Modifier.height(8.dp))
             Text(
-                text = day.formatToViewDateDefaults("EEEE").toUpperCase(Locale.ROOT),
+                text = day.formatToViewDateDefaults("EEEE").uppercase(Locale.ROOT),
                 modifier = Modifier.wrapContentSize(align = Alignment.Center),
                 maxLines = 1,
-                style = MaterialTheme.typography.overline.merge(
+                style = MaterialTheme.typography.bodySmall.merge(
                     TextStyle(
                         color = if (day.onlyDate() == selectedDate.onlyDate()) {
                             colors.secondary
@@ -229,7 +240,7 @@ fun DayButtonView(day: Date) {
 @Preview
 @Composable
 fun BuyTickets_Preview() {
-    MaterialTheme(colors = lightThemeColors) {
+    MaterialTheme(colorScheme = lightThemeColors) {
         val navController = rememberNavController()
         BuyTicketsScreen(navController, movies.flatten().first().id)
     }
