@@ -20,7 +20,7 @@ jobs:
     - name: Setup JDK {{ env.JDK_VERSION }}
       uses: actions/setup-java@v4
       with:
-        java-version: '{{ env.JDK_VERSION }}'
+        java-version: 17
         distribution: 'temurin'
     - name: Build with Gradle
       run: ./gradlew build
