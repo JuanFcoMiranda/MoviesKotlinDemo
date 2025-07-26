@@ -23,6 +23,7 @@ jobs:
       with:
         java-version: ${{ env.JDK_VERSION }}
         distribution: ${{ env.JDK_DISTRIBUTION }}
+        cache: gradle
 
     - name: Make gradlew executable
       run: chmod +x ./gradlew
