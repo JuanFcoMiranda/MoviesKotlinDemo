@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -61,14 +64,10 @@ fun MoviesHomeScreen(navController: NavHostController) {
 
 @Composable
 fun HomeScreenContent(navController: NavHostController, padding: PaddingValues) {
-    Column {
-        Column {
-            movies.forEach { row ->
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                    row.forEach { movie ->
-                        MovieView(movie, navController)
-                    }
-                }
+    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp), modifier = Modifier.padding(padding)) {
+        items(movies) { movie ->
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                MovieView(movie, navController)
             }
         }
     }

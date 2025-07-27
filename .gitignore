@@ -29,3 +29,4 @@
 /demo/.gradle/checksums/sha1-checksums.bin
 /demo/.gradle/configuration-cache/gc.properties
 /demo/.gradle/vcs-1/gc.properties
+/.kotlin/**

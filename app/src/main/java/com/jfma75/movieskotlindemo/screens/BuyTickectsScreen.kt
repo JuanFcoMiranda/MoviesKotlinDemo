@@ -1,6 +1,7 @@
 package com.jfma75.movieskotlindemo.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -35,7 +36,9 @@ import com.jfma75.movieskotlindemo.extensions.onlyDate
 import com.jfma75.movieskotlindemo.models.Movie
 import com.jfma75.movieskotlindemo.movies
 import com.jfma75.movieskotlindemo.theme.lightThemeColors
+import kotlinx.coroutines.flow.merge
 import java.util.*
+import kotlin.collections.flatten
 
 /**
  * @sample com.jfma75.movieskotlindemo.BuyTickets_Preview
@@ -46,7 +49,7 @@ var selectedDate by mutableStateOf(Date())
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
-    val movie = movies.flatten().first { movie -> movie.id == movieId }
+    val movie = movies.first { movie -> movie.id == movieId }
 
     Scaffold(
         topBar = {
@@ -54,7 +57,7 @@ fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
                 title = {
                     Text(
                         text = movie.name,
-                        style = MaterialTheme.typography.bodySmall,
+                        style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.primary
                     )
                 },
@@ -79,8 +82,6 @@ fun BuyTicketsScreen(navController: NavController, movieId: Long?) {
 
 @Composable
 fun HeaderView(movie: Movie) {
-    val colors = MaterialTheme.colorScheme
-
     Column(modifier = Modifier.padding(8.dp)) {
         Box(modifier = Modifier.size(height = 180.dp, width = 120.dp)) {
             Image(
@@ -92,8 +93,8 @@ fun HeaderView(movie: Movie) {
         }
     }
     Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.Start) {
-        Text(text = movie.name, style = MaterialTheme.typography.titleSmall)
-        Text(text = movie.genre, style = MaterialTheme.typography.bodyMedium)
+        Text(text = movie.name, style = MaterialTheme.typography.titleLarge)
+        Text(text = movie.genre, style = MaterialTheme.typography.bodyLarge)
 
         Spacer(Modifier.height(16.dp))
 
@@ -101,23 +102,13 @@ fun HeaderView(movie: Movie) {
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
                     text = selectedDate.formatToViewDateDefaults("MMM dd EEEE").uppercase(Locale.ROOT),
-                    style = MaterialTheme.typography.titleSmall.merge(
-                        TextStyle(
-                            color = colors.secondary,
-                            fontSize = 12.sp
-                        )
-                    )
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
             Button(onClick = {}, shape = RoundedCornerShape(8.dp)) {
                 Text(
                     text = "7:00 PM",
-                    style = MaterialTheme.typography.titleSmall.merge(
-                        TextStyle(
-                            color = colors.secondary,
-                            fontSize = 12.sp
-                        )
-                    )
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
@@ -170,24 +161,34 @@ fun DayButtonView(day: Date) {
                 else -> { colors.secondary }
             }
         ),
-        modifier = Modifier.size(width = 70.dp, height = 90.dp).padding(0.dp)
+        modifier = Modifier.size(width = 75.dp, height = 95.dp)
+            .padding(0.dp)
+            .border(
+                width = 1.dp,
+                color = when {
+                    day.onlyDate() == selectedDate.onlyDate() -> colors.secondary
+                    else -> colors.primary
+                },
+                shape = RoundedCornerShape(12.dp)
+            )
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
             Text(
                 text = day.formatToViewDateDefaults("MMM").uppercase(Locale.ROOT),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.bodySmall.merge(
+                style = MaterialTheme.typography.bodyMedium.merge(
                     TextStyle(
-                        color = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            colors.secondary
-                        } else {
-                            colors.primary
+                        color = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> colors.secondary
+                            else -> colors.primary
                         },
-                        fontSize = 14.sp,
-                        fontWeight = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            FontWeight.ExtraBold
-                        } else {
-                            FontWeight.Light
+                        fontSize = 12.sp,
+                        fontWeight = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> FontWeight.ExtraBold
+                            else -> FontWeight.Light
                         }
                     )
                 )
@@ -196,18 +197,16 @@ fun DayButtonView(day: Date) {
             Text(
                 text = day.formatToViewDateDefaults("dd").uppercase(Locale.ROOT),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.bodySmall.merge(
+                style = MaterialTheme.typography.bodyMedium.merge(
                     TextStyle(
-                        color = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            colors.secondary
-                        } else {
-                            colors.primary
+                        color = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> colors.secondary
+                            else -> colors.primary
                         },
-                        fontSize = 18.sp,
-                        fontWeight = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            FontWeight.ExtraBold
-                        } else {
-                            FontWeight.Light
+                        fontSize = 16.sp,
+                        fontWeight = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> FontWeight.ExtraBold
+                            else -> FontWeight.Light
                         }
                     )
                 )
@@ -217,18 +216,16 @@ fun DayButtonView(day: Date) {
                 text = day.formatToViewDateDefaults("EEEE").uppercase(Locale.ROOT),
                 modifier = Modifier.wrapContentSize(align = Alignment.Center),
                 maxLines = 1,
-                style = MaterialTheme.typography.bodySmall.merge(
+                style = MaterialTheme.typography.bodyMedium.merge(
                     TextStyle(
-                        color = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            colors.secondary
-                        } else {
-                            colors.primary
+                        color = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> colors.secondary
+                            else -> colors.primary
                         },
-                        fontSize = 14.sp,
-                        fontWeight = if (day.onlyDate() == selectedDate.onlyDate()) {
-                            FontWeight.ExtraBold
-                        } else {
-                            FontWeight.Light
+                        fontSize = 12.sp,
+                        fontWeight = when {
+                            day.onlyDate() == selectedDate.onlyDate() -> FontWeight.ExtraBold
+                            else -> FontWeight.Light
                         }
                     )
                 )
@@ -242,7 +239,7 @@ fun DayButtonView(day: Date) {
 fun BuyTickets_Preview() {
     MaterialTheme(colorScheme = lightThemeColors) {
         val navController = rememberNavController()
-        BuyTicketsScreen(navController, movies.flatten().first().id)
+        BuyTicketsScreen(navController, movies.first().id)
     }
     /*MaterialTheme(colors = darkThemeColors) {
         BuyTicketsScreen(movies.flatten().first().id, {})
