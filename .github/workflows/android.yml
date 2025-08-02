@@ -9,6 +9,7 @@ on:
 env:
   JDK_VERSION: 17
   JDK_DISTRIBUTION: temurin
+  DAY_OF_WEEK: Monday
 
 jobs:
   build:
@@ -16,6 +17,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: "Say Hello Mona it's Monday"
+      run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+      env:
+        First_Name: Mona
+
     - uses: actions/checkout@v4
 
     - name: Setup JDK $JDK_VERSION
