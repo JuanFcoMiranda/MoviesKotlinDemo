@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup JDK $JDK_VERSION
+    - name: Setup JDK ${{ env.JDK_VERSION }}
       uses: actions/setup-java@v4
       with:
         java-version: ${{ env.JDK_VERSION }}
