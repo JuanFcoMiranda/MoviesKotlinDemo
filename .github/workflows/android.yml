@@ -21,8 +21,8 @@ jobs:
     - name: Setup JDK $JDK_VERSION
       uses: actions/setup-java@v4
       with:
-        java-version: $JDK_VERSION
-        distribution: $JDK_DISTRIBUTION
+        java-version: ${{ env.JDK_VERSION }}
+        distribution: ${{ env.JDK_DISTRIBUTION }}
         cache: gradle
 
     - name: Setup Gradle
