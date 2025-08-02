@@ -9,7 +9,6 @@ on:
 env:
   JDK_VERSION: 17
   JDK_DISTRIBUTION: temurin
-  DAY_OF_WEEK: Monday
 
 jobs:
   build:
@@ -17,18 +16,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: "Say Hello Mona it's Monday"
-      run: echo "Hello $First_Name. Today is $DAY_OF_WEEK!"
-      env:
-        First_Name: Mona
-
     - uses: actions/checkout@v4
 
     - name: Setup JDK $JDK_VERSION
       uses: actions/setup-java@v4
       with:
-        java-version: $JDK_VERSION
-        distribution: $JDK_DISTRIBUTION
+        java-version: '$JDK_VERSION'
+        distribution: '$JDK_DISTRIBUTION'
         cache: gradle
 
     - name: Setup Gradle
